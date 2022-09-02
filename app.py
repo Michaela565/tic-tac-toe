@@ -1,4 +1,5 @@
 from glob import glob
+from multiprocessing.connection import wait
 import tkinter as tk
 import tkinter.ttk as ttk
 
@@ -11,7 +12,9 @@ oWins = False
 # Width and Height of my buttons
 myWidth = 10
 myHeight = 5
+buttonColor = "#7C94CE"
 # -----------------------------
+
 
 # Possible texts of the buttons
 emptySpace = ""
@@ -28,11 +31,10 @@ isO = False # Boolean that tells us if it's O's turn
 playSpace = [0, 0, 0, 0, 0, 0, 0, 0, 0]
 # -----------------------------
 
-background = tk.Frame(width=350, height=360, bg = "red")
+background = tk.Frame(width=350, height=360, bg = "#B6DBFF")
 background.place(x=-5,y=0)
 
-whosTurn = tk.Label(text="It's X turn.") # Label that tells us who's turn is it
-
+whosTurn = tk.Label(text="It's X turn.", bg = "#B6DBFF") # Label that tells us who's turn is it
 
 # Changes the text of whosTurn to show who's turn is it
 def changeWhosTurn():
@@ -63,15 +65,15 @@ def changeBtnText(btn):
 # -----------------------------
 
 # All the buttons
-button1 = tk.Button(text = emptySpace, width = myWidth, bg= "blue", height= myHeight, command= lambda: [changeIndex(button1), changeBtnText(button1)])
-button2 = tk.Button(text = emptySpace, width = myWidth, bg= "blue", height= myHeight, command= lambda: [changeIndex(button2), changeBtnText(button2)])
-button3 = tk.Button(text = emptySpace, width = myWidth, bg= "blue", height= myHeight, command= lambda: [changeIndex(button3), changeBtnText(button3)])
-button4 = tk.Button(text = emptySpace, width = myWidth, bg= "blue", height= myHeight, command= lambda: [changeIndex(button4), changeBtnText(button4)])
-button5 = tk.Button(text = emptySpace, width = myWidth, bg= "blue", height= myHeight, command= lambda: [changeIndex(button5), changeBtnText(button5)])
-button6 = tk.Button(text = emptySpace, width = myWidth, bg= "blue", height= myHeight, command= lambda: [changeIndex(button6), changeBtnText(button6)])
-button7 = tk.Button(text = emptySpace, width = myWidth, bg= "blue", height= myHeight, command= lambda: [changeIndex(button7), changeBtnText(button7)])
-button8 = tk.Button(text = emptySpace, width = myWidth, bg= "blue", height= myHeight, command= lambda: [changeIndex(button8), changeBtnText(button8)])
-button9 = tk.Button(text = emptySpace, width = myWidth, bg= "blue", height= myHeight, command= lambda: [changeIndex(button9), changeBtnText(button9)])
+button1 = tk.Button(text = emptySpace, width = myWidth, bg= buttonColor, height= myHeight, command= lambda: [changeIndex(button1), changeBtnText(button1)])
+button2 = tk.Button(text = emptySpace, width = myWidth, bg= buttonColor, height= myHeight, command= lambda: [changeIndex(button2), changeBtnText(button2)])
+button3 = tk.Button(text = emptySpace, width = myWidth, bg= buttonColor, height= myHeight, command= lambda: [changeIndex(button3), changeBtnText(button3)])
+button4 = tk.Button(text = emptySpace, width = myWidth, bg= buttonColor, height= myHeight, command= lambda: [changeIndex(button4), changeBtnText(button4)])
+button5 = tk.Button(text = emptySpace, width = myWidth, bg= buttonColor, height= myHeight, command= lambda: [changeIndex(button5), changeBtnText(button5)])
+button6 = tk.Button(text = emptySpace, width = myWidth, bg= buttonColor, height= myHeight, command= lambda: [changeIndex(button6), changeBtnText(button6)])
+button7 = tk.Button(text = emptySpace, width = myWidth, bg= buttonColor, height= myHeight, command= lambda: [changeIndex(button7), changeBtnText(button7)])
+button8 = tk.Button(text = emptySpace, width = myWidth, bg= buttonColor, height= myHeight, command= lambda: [changeIndex(button8), changeBtnText(button8)])
+button9 = tk.Button(text = emptySpace, width = myWidth, bg= buttonColor, height= myHeight, command= lambda: [changeIndex(button9), changeBtnText(button9)])
 # -----------------------------
 
 # Change numbers of the assigned index in the array
@@ -197,8 +199,10 @@ def game():
         window.after(1000, game)
     elif gameOver and oWins:
         whosTurn['text'] = "Player O wins."
+        whosTurn['fg'] = "#E24599"
     elif gameOver and not oWins:
         whosTurn['text'] = "Player X wins."
+        whosTurn['fg'] = "#E24599"
     # -----------------------------
 
 
@@ -216,6 +220,7 @@ button7.grid(row=3, column=1, padx=10, pady= 10)
 button8.grid(row=3, column=2, padx=10, pady= 10)
 button9.grid(row=3, column=3, padx=10, pady= 10)
 # -----------------------------
+
 
 window.after(1000, game)
 window.mainloop()
