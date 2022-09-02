@@ -4,6 +4,7 @@ import tkinter.ttk as ttk
 
 window = tk.Tk() # Initializes the window 
 window.title("Tic Tac Toe") # Makes the title Tic Tac Toe
+window.geometry("300x300")
 gameOver = False
 oWins = False
 # Width and Height of my buttons
