@@ -1,10 +1,11 @@
+from glob import glob
 import tkinter as tk
 import tkinter.ttk as ttk
 
 
 window = tk.Tk() # Initializes the window 
 window.title("Tic Tac Toe") # Makes the title Tic Tac Toe
-window.geometry("300x300")
+window.geometry("300x360")
 gameOver = False
 oWins = False
 # Width and Height of my buttons
@@ -13,7 +14,7 @@ myHeight = 5
 # -----------------------------
 
 # Possible texts of the buttons
-emptySpace = "|  |"
+emptySpace = ""
 xSpace = "X"
 oSpace = "O"
 # -----------------------------
@@ -27,7 +28,11 @@ isO = False # Boolean that tells us if it's O's turn
 playSpace = [0, 0, 0, 0, 0, 0, 0, 0, 0]
 # -----------------------------
 
+background = tk.Frame(width=350, height=360, bg = "red")
+background.place(x=-5,y=0)
+
 whosTurn = tk.Label(text="It's X turn.") # Label that tells us who's turn is it
+
 
 # Changes the text of whosTurn to show who's turn is it
 def changeWhosTurn():
@@ -43,16 +48,18 @@ def changeWhosTurn():
 def changeBtnText(btn):
     # Declare global variables
     global isO
-    if isO and btn['text'] == emptySpace:
-        btn['text'] = oSpace
-        isO = False
-        changeWhosTurn()
-    elif isO == False and btn['text'] == emptySpace:
-        btn['text'] = xSpace
-        isO = True
-        changeWhosTurn()
-    else:
-        pass
+    global gameOver
+    if not gameOver:
+        if isO and btn['text'] == emptySpace:
+            btn['text'] = oSpace
+            isO = False
+            changeWhosTurn()
+        elif isO == False and btn['text'] == emptySpace:
+            btn['text'] = xSpace
+            isO = True
+            changeWhosTurn()
+        else:
+            pass
 # -----------------------------
 
 # All the buttons
@@ -72,45 +79,47 @@ def changeIndex(btnn):
     # Declare global variables
     global playSpace
     global isO
+    global gameOver
     # -----------------------------
-    if isO:
-        if btnn == button1:
-            playSpace[0] = 2
-        elif btnn == button2:
-            playSpace[1] = 2
-        elif btnn == button3:
-            playSpace[2] = 2
-        elif btnn == button4:
-            playSpace[3] = 2
-        elif btnn == button5:
-            playSpace[4] = 2
-        elif btnn == button6:
-            playSpace[5] = 2
-        elif btnn == button7:
-            playSpace[6] = 2
-        elif btnn == button8:
-            playSpace[7] = 2
-        elif btnn == button9:
-            playSpace[8] = 2
-    else:
-        if btnn == button1:
-            playSpace[0] = 1
-        elif btnn == button2:
-            playSpace[1] = 1
-        elif btnn == button3:
-            playSpace[2] = 1
-        elif btnn == button4:
-            playSpace[3] = 1
-        elif btnn == button5:
-            playSpace[4] = 1
-        elif btnn == button6:
-            playSpace[5] = 1
-        elif btnn == button7:
-            playSpace[6] = 1
-        elif btnn == button8:
-            playSpace[7] = 1
-        elif btnn == button9:
-            playSpace[8] = 1
+    if not gameOver:
+        if isO:
+            if btnn == button1:
+                playSpace[0] = 2
+            elif btnn == button2:
+                playSpace[1] = 2
+            elif btnn == button3:
+                playSpace[2] = 2
+            elif btnn == button4:
+                playSpace[3] = 2
+            elif btnn == button5:
+                playSpace[4] = 2
+            elif btnn == button6:
+                playSpace[5] = 2
+            elif btnn == button7:
+                playSpace[6] = 2
+            elif btnn == button8:
+                playSpace[7] = 2
+            elif btnn == button9:
+                playSpace[8] = 2
+        else:
+            if btnn == button1:
+                playSpace[0] = 1
+            elif btnn == button2:
+                playSpace[1] = 1
+            elif btnn == button3:
+                playSpace[2] = 1
+            elif btnn == button4:
+                playSpace[3] = 1
+            elif btnn == button5:
+                playSpace[4] = 1
+            elif btnn == button6:
+                playSpace[5] = 1
+            elif btnn == button7:
+                playSpace[6] = 1
+            elif btnn == button8:
+                playSpace[7] = 1
+            elif btnn == button9:
+                playSpace[8] = 1
 # -----------------------------
 
 # The main brain of the gameplay, keeps checking if one of the players wins
@@ -196,16 +205,16 @@ def game():
 # -----------------------------        
 
 # Renders the whole thing
-whosTurn.grid(row=0, column= 2)
-button1.grid(row=1, column=1)
-button2.grid(row=1, column=2)
-button3.grid(row=1, column=3)
-button4.grid(row=2, column=1)
-button5.grid(row=2, column=2)
-button6.grid(row=2, column=3)
-button7.grid(row=3, column=1)
-button8.grid(row=3, column=2)
-button9.grid(row=3, column=3)
+whosTurn.grid(row=0, column= 2, padx=10, pady= 10)
+button1.grid(row=1, column=1, padx=10, pady= 10)
+button2.grid(row=1, column=2, padx=10, pady= 10)
+button3.grid(row=1, column=3, padx=10, pady= 10)
+button4.grid(row=2, column=1, padx=10, pady= 10)
+button5.grid(row=2, column=2, padx=10, pady= 10)
+button6.grid(row=2, column=3, padx=10, pady= 10)
+button7.grid(row=3, column=1, padx=10, pady= 10)
+button8.grid(row=3, column=2, padx=10, pady= 10)
+button9.grid(row=3, column=3, padx=10, pady= 10)
 # -----------------------------
 
 window.after(1000, game)
