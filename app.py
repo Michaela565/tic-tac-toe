@@ -1,12 +1,14 @@
 from glob import glob
 from multiprocessing.connection import wait
 import tkinter as tk
+from tkinter import font
 import tkinter.ttk as ttk
+
 
 
 window = tk.Tk() # Initializes the window 
 window.title("Tic Tac Toe") # Makes the title Tic Tac Toe
-window.geometry("300x360")
+window.geometry("465x520")
 gameOver = False
 oWins = False
 # Width and Height of my buttons
@@ -18,8 +20,11 @@ buttonColor = "#7C94CE"
 
 # Possible texts of the buttons
 emptySpace = ""
+emptySpaceImg = tk.PhotoImage(file = r"emptySpace.png")
 xSpace = "X"
+xSpaceImg = tk.PhotoImage(file = r"x.png")
 oSpace = "O"
+oSpaceImg = tk.PhotoImage(file = r"o.png")
 # -----------------------------
 
 isO = False # Boolean that tells us if it's O's turn
@@ -31,10 +36,10 @@ isO = False # Boolean that tells us if it's O's turn
 playSpace = [0, 0, 0, 0, 0, 0, 0, 0, 0]
 # -----------------------------
 
-background = tk.Frame(width=350, height=360, bg = "#B6DBFF")
+background = tk.Frame(width=510, height=520, bg = "#CFE6FF")
 background.place(x=-5,y=0)
 
-whosTurn = tk.Label(text="It's X turn.", bg = "#B6DBFF") # Label that tells us who's turn is it
+whosTurn = tk.Label(text="It's X turn.", bg = "#CFE6FF", font=("Arial", 16, "bold")) # Label that tells us who's turn is it
 
 # Changes the text of whosTurn to show who's turn is it
 def changeWhosTurn():
@@ -54,10 +59,12 @@ def changeBtnText(btn):
     if not gameOver:
         if isO and btn['text'] == emptySpace:
             btn['text'] = oSpace
+            btn['image'] = oSpaceImg
             isO = False
             changeWhosTurn()
         elif isO == False and btn['text'] == emptySpace:
             btn['text'] = xSpace
+            btn['image'] = xSpaceImg
             isO = True
             changeWhosTurn()
         else:
@@ -65,15 +72,15 @@ def changeBtnText(btn):
 # -----------------------------
 
 # All the buttons
-button1 = tk.Button(text = emptySpace, width = myWidth, bg= buttonColor, height= myHeight, command= lambda: [changeIndex(button1), changeBtnText(button1)])
-button2 = tk.Button(text = emptySpace, width = myWidth, bg= buttonColor, height= myHeight, command= lambda: [changeIndex(button2), changeBtnText(button2)])
-button3 = tk.Button(text = emptySpace, width = myWidth, bg= buttonColor, height= myHeight, command= lambda: [changeIndex(button3), changeBtnText(button3)])
-button4 = tk.Button(text = emptySpace, width = myWidth, bg= buttonColor, height= myHeight, command= lambda: [changeIndex(button4), changeBtnText(button4)])
-button5 = tk.Button(text = emptySpace, width = myWidth, bg= buttonColor, height= myHeight, command= lambda: [changeIndex(button5), changeBtnText(button5)])
-button6 = tk.Button(text = emptySpace, width = myWidth, bg= buttonColor, height= myHeight, command= lambda: [changeIndex(button6), changeBtnText(button6)])
-button7 = tk.Button(text = emptySpace, width = myWidth, bg= buttonColor, height= myHeight, command= lambda: [changeIndex(button7), changeBtnText(button7)])
-button8 = tk.Button(text = emptySpace, width = myWidth, bg= buttonColor, height= myHeight, command= lambda: [changeIndex(button8), changeBtnText(button8)])
-button9 = tk.Button(text = emptySpace, width = myWidth, bg= buttonColor, height= myHeight, command= lambda: [changeIndex(button9), changeBtnText(button9)])
+button1 = tk.Button(text = emptySpace, image= emptySpaceImg, command= lambda: [changeIndex(button1), changeBtnText(button1)])
+button2 = tk.Button(text = emptySpace, image= emptySpaceImg, command= lambda: [changeIndex(button2), changeBtnText(button2)])
+button3 = tk.Button(text = emptySpace, image= emptySpaceImg, command= lambda: [changeIndex(button3), changeBtnText(button3)])
+button4 = tk.Button(text = emptySpace, image= emptySpaceImg, command= lambda: [changeIndex(button4), changeBtnText(button4)])
+button5 = tk.Button(text = emptySpace, image= emptySpaceImg, command= lambda: [changeIndex(button5), changeBtnText(button5)])
+button6 = tk.Button(text = emptySpace, image= emptySpaceImg, command= lambda: [changeIndex(button6), changeBtnText(button6)])
+button7 = tk.Button(text = emptySpace, image= emptySpaceImg, command= lambda: [changeIndex(button7), changeBtnText(button7)])
+button8 = tk.Button(text = emptySpace, image= emptySpaceImg, command= lambda: [changeIndex(button8), changeBtnText(button8)])
+button9 = tk.Button(text = emptySpace, image= emptySpaceImg, command= lambda: [changeIndex(button9), changeBtnText(button9)])
 # -----------------------------
 
 # Change numbers of the assigned index in the array
