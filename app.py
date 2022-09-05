@@ -11,6 +11,7 @@ window.title("Tic Tac Toe") # Makes the title Tic Tac Toe
 window.geometry("465x520")
 gameOver = False
 oWins = False
+lastMove = 0
 # Width and Height of my buttons
 myWidth = 10
 myHeight = 5
@@ -72,7 +73,7 @@ def changeBtnText(btn):
 # -----------------------------
 
 # All the buttons
-button1 = tk.Button(text = emptySpace, image= emptySpaceImg, command= lambda: [changeIndex(button1), changeBtnText(button1)])
+button1 = tk.Button(text = emptySpace, image= emptySpaceImg, command= lambda: [changeIndex(button1), changeBtnText(button1),])
 button2 = tk.Button(text = emptySpace, image= emptySpaceImg, command= lambda: [changeIndex(button2), changeBtnText(button2)])
 button3 = tk.Button(text = emptySpace, image= emptySpaceImg, command= lambda: [changeIndex(button3), changeBtnText(button3)])
 button4 = tk.Button(text = emptySpace, image= emptySpaceImg, command= lambda: [changeIndex(button4), changeBtnText(button4)])
@@ -86,6 +87,7 @@ button9 = tk.Button(text = emptySpace, image= emptySpaceImg, command= lambda: [c
 # Change numbers of the assigned index in the array
 def changeIndex(btnn):
     # Declare global variables
+    global lastMove
     global playSpace
     global isO
     global gameOver
@@ -94,22 +96,31 @@ def changeIndex(btnn):
         if isO:
             if btnn == button1:
                 playSpace[0] = 2
+                lastMove = 1
             elif btnn == button2:
                 playSpace[1] = 2
+                lastMove = 2
             elif btnn == button3:
                 playSpace[2] = 2
+                lastMove = 3
             elif btnn == button4:
                 playSpace[3] = 2
+                lastMove = 4
             elif btnn == button5:
                 playSpace[4] = 2
+                lastMove = 5
             elif btnn == button6:
                 playSpace[5] = 2
+                lastMove = 6
             elif btnn == button7:
                 playSpace[6] = 2
+                lastMove = 7
             elif btnn == button8:
                 playSpace[7] = 2
+                lastMove = 8
             elif btnn == button9:
                 playSpace[8] = 2
+                lastMove = 9
         else:
             if btnn == button1:
                 playSpace[0] = 1
@@ -211,6 +222,35 @@ def game():
         whosTurn['text'] = "Player X wins."
         whosTurn['fg'] = "#E24599"
     # -----------------------------
+def ai():
+    if not isO and not gameOver:
+        print(lastMove)
+        if lastMove == 1:
+            if playSpace[1] == 2:
+                button3.invoke()
+            elif playSpace[3] == 2:
+                button7.invoke()
+            elif playSpace[4] == 2:
+                button9.invoke()
+            else:
+                button4.invoke()
+        elif lastMove == 2:
+            pass
+        elif lastMove == 3:
+            pass
+        elif lastMove == 4:
+            pass
+        elif lastMove == 5:
+            pass
+        elif lastMove == 6:
+            pass
+        elif lastMove == 7:
+            pass
+        elif lastMove == 8:
+            pass
+        else: # 9
+            pass
+    window.after(1000, ai)
 
 
 # -----------------------------        
@@ -230,4 +270,5 @@ button9.grid(row=3, column=3, padx=10, pady= 10)
 
 
 window.after(1000, game)
+window.after(1000, ai)
 window.mainloop()
