@@ -235,21 +235,85 @@ def ai():
             else:
                 button4.invoke()
         elif lastMove == 2:
-            pass
+            if playSpace[0] == 2:
+                button3.invoke()
+            elif playSpace[2] == 2:
+                button1.invoke()
+            elif playSpace[4] == 2:
+                button7.invoke()
+            else:
+                button4.invoke() 
         elif lastMove == 3:
-            pass
+            if playSpace[1] == 2:
+                button1.invoke()
+            elif playSpace[5] == 2:
+                button9.invoke()
+            elif playSpace[4] == 2:
+                button7.invoke()
+            else:
+                button5.invoke()
         elif lastMove == 4:
-            pass
+            if playSpace[0] == 2:
+                button7.invoke()
+            elif playSpace[6] == 2:
+                button1.invoke()
+            elif playSpace[4] == 2:
+                button6.invoke()
+            else:
+                button4.invoke()
         elif lastMove == 5:
-            pass
+            if playSpace[0] == 2:
+                button9.invoke()
+            elif playSpace[1] == 2:
+                button8.invoke()
+            elif playSpace[2] == 2:
+                button7.invoke()
+            elif playSpace[3] == 2:
+                button6.invoke()
+            elif playSpace[5] == 2:
+                button4.invoke()
+            elif playSpace[6] == 2:
+                button3.invoke()
+            elif playSpace[7] == 2:
+                button2.invoke()
+            elif playSpace[8] == 2:
+                button1.invoke()
         elif lastMove == 6:
-            pass
+            if playSpace[2] == 2:
+                button9.invoke()
+            elif playSpace[8] == 2:
+                button3.invoke()
+            elif playSpace[4] == 2:
+                button4.invoke()
+            else:
+                button9.invoke()
         elif lastMove == 7:
-            pass
+            if playSpace[3] == 2:
+                button1.invoke()
+            elif playSpace[7] == 2:
+                button9.invoke()
+            elif playSpace[4] == 2:
+                button3.invoke()
+            else:
+                button4.invoke()
         elif lastMove == 8:
-            pass
+            if playSpace[6] == 2:
+                button9.invoke()
+            elif playSpace[8] == 2:
+                button7.invoke()
+            elif playSpace[4] == 2:
+                button2.invoke()
+            else:
+                button4.invoke()
         else: # 9
-            pass
+            if playSpace[5] == 2:
+                button3.invoke()
+            elif playSpace[7] == 2:
+                button7.invoke()
+            elif playSpace[4] == 2:
+                button1.invoke()
+            else:
+                button4.invoke()
     window.after(1000, ai)
 
 
