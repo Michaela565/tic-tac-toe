@@ -3,23 +3,23 @@ from multiprocessing.connection import wait
 import tkinter as tk
 from tkinter import font
 import tkinter.ttk as ttk
+import random
 
 
 
 window = tk.Tk() # Initializes the window 
 window.title("Tic Tac Toe") # Makes the title Tic Tac Toe
-window.geometry("465x520")
-gameOver = False
-oWins = False
-lastMove = 0
+window.geometry("465x520") # Sets window size
+gameOver = False # Tells if its gameover
+oWins = False # Tells if O wins
+lastMove = 0 # What was the last move of O (which button did they click)
 # Width and Height of my buttons
 myWidth = 10
 myHeight = 5
-buttonColor = "#7C94CE"
 # -----------------------------
 
 
-# Possible texts of the buttons
+# Possible texts and images of the buttons
 emptySpace = ""
 emptySpaceImg = tk.PhotoImage(file = r"emptySpace.png")
 xSpace = "X"
@@ -37,7 +37,7 @@ isO = False # Boolean that tells us if it's O's turn
 playSpace = [0, 0, 0, 0, 0, 0, 0, 0, 0]
 # -----------------------------
 
-background = tk.Frame(width=510, height=520, bg = "#CFE6FF")
+background = tk.Frame(width=510, height=520, bg = "#CFE6FF") # Background for the window
 background.place(x=-5,y=0)
 
 whosTurn = tk.Label(text="It's X turn.", bg = "#CFE6FF", font=("Arial", 16, "bold")) # Label that tells us who's turn is it
@@ -52,7 +52,7 @@ def changeWhosTurn():
         whosTurn['text'] = "It's " + xSpace + " turn."
 # -----------------------------
 
-# Changes the text on the buttons to which player pressed it
+# Changes the text and image on the buttons to which player pressed it
 def changeBtnText(btn):
     # Declare global variables
     global isO
@@ -62,12 +62,12 @@ def changeBtnText(btn):
             btn['text'] = oSpace
             btn['image'] = oSpaceImg
             isO = False
-            changeWhosTurn()
+            changeWhosTurn() # After the change changes the turn to the X player
         elif isO == False and btn['text'] == emptySpace:
             btn['text'] = xSpace
             btn['image'] = xSpaceImg
             isO = True
-            changeWhosTurn()
+            changeWhosTurn() # After the change changes the turn to the O player
         else:
             pass
 # -----------------------------
@@ -222,15 +222,17 @@ def game():
         whosTurn['text'] = "Player X wins."
         whosTurn['fg'] = "#E24599"
     # -----------------------------
+# The AI for X's moves, rlly unoptimized
+# TODO: optimize this fucking thing pls
 def ai():
     if not isO and not gameOver:
         print(lastMove)
         if lastMove == 1:
-            if playSpace[1] == 2:
+            if playSpace[1] == 2 and playSpace[2] != 1:
                 button3.invoke()
-            elif playSpace[3] == 2:
+            elif playSpace[3] == 2 and playSpace[6] != 1:
                 button7.invoke()
-            elif playSpace[4] == 2:
+            elif playSpace[4] == 2 and playSpace[8] != 1:
                 button9.invoke()
             else:
                 if playSpace[0] == 0:
@@ -252,11 +254,11 @@ def ai():
                 elif playSpace[8] == 0:
                     button9.invoke()
         elif lastMove == 2:
-            if playSpace[0] == 2:
+            if playSpace[0] == 2 and playSpace[2] != 1:
                 button3.invoke()
-            elif playSpace[2] == 2:
+            elif playSpace[2] == 2 and playSpace[0] != 1:
                 button1.invoke()
-            elif playSpace[4] == 2:
+            elif playSpace[4] == 2 and playSpace[6] != 1:
                 button7.invoke()
             else:
                 if playSpace[0] == 0:
@@ -278,11 +280,11 @@ def ai():
                 elif playSpace[8] == 0:
                     button9.invoke() 
         elif lastMove == 3:
-            if playSpace[1] == 2:
+            if playSpace[1] == 2 and playSpace[0] != 1:
                 button1.invoke()
-            elif playSpace[5] == 2:
+            elif playSpace[5] == 2 and playSpace[8] != 1:
                 button9.invoke()
-            elif playSpace[4] == 2:
+            elif playSpace[4] == 2 and playSpace[6] != 1:
                 button7.invoke()
             else:
                 if playSpace[0] == 0:
@@ -304,11 +306,11 @@ def ai():
                 elif playSpace[8] == 0:
                     button9.invoke()
         elif lastMove == 4:
-            if playSpace[0] == 2:
+            if playSpace[0] == 2 and playSpace[6] != 1:
                 button7.invoke()
-            elif playSpace[6] == 2:
+            elif playSpace[6] == 2 and playSpace[0] != 1:
                 button1.invoke()
-            elif playSpace[4] == 2:
+            elif playSpace[4] == 2 and playSpace[5] != 1:
                 button6.invoke()
             else:
                 if playSpace[0] == 0:
@@ -347,20 +349,37 @@ def ai():
             elif playSpace[8] == 2:
                 button1.invoke()
         elif lastMove == 6:
-            if playSpace[2] == 2:
+            if playSpace[2] == 2 and playSpace[8] != 1:
                 button9.invoke()
-            elif playSpace[8] == 2:
+            elif playSpace[8] == 2 and playSpace[2] != 1:
                 button3.invoke()
-            elif playSpace[4] == 2:
+            elif playSpace[4] == 2 and playSpace[3] != 1:
                 button4.invoke()
             else:
-                button9.invoke()
+                if playSpace[0] == 0:
+                    button1.invoke()
+                elif playSpace[1] == 0:
+                    button2.invoke()
+                elif playSpace[2] == 0:
+                    button3.invoke()
+                elif playSpace[3] == 0:
+                    button4.invoke()
+                elif playSpace[4] == 0:
+                    button5.invoke()
+                elif playSpace[5] == 0:
+                    button6.invoke()
+                elif playSpace[6] == 0:
+                    button7.invoke()
+                elif playSpace[7] == 0:
+                    button8.invoke()
+                elif playSpace[8] == 0:
+                    button9.invoke()
         elif lastMove == 7:
-            if playSpace[3] == 2:
+            if playSpace[3] == 2 and playSpace[0] != 1:
                 button1.invoke()
-            elif playSpace[7] == 2:
+            elif playSpace[7] == 2 and playSpace[8] != 1:
                 button9.invoke()
-            elif playSpace[4] == 2:
+            elif playSpace[4] == 2 and playSpace[2] != 1:
                 button3.invoke()
             else:
                 if playSpace[0] == 0:
@@ -382,11 +401,11 @@ def ai():
                 elif playSpace[8] == 0:
                     button9.invoke()
         elif lastMove == 8:
-            if playSpace[6] == 2:
+            if playSpace[6] == 2 and playSpace[8] != 1:
                 button9.invoke()
-            elif playSpace[8] == 2:
+            elif playSpace[8] == 2 and playSpace[6] != 1:
                 button7.invoke()
-            elif playSpace[4] == 2:
+            elif playSpace[4] == 2 and playSpace[1] != 1:
                 button2.invoke()
             else:
                 if playSpace[0] == 0:
@@ -407,12 +426,32 @@ def ai():
                     button8.invoke()
                 elif playSpace[8] == 0:
                     button9.invoke()
-        else: # 9
-            if playSpace[5] == 2:
+        elif lastMove == 0:
+            a = random.randrange(0, 9)
+            if a == 0:
+                button1.invoke()
+            elif a == 1:
+                button2.invoke()
+            elif a == 2:
                 button3.invoke()
-            elif playSpace[7] == 2:
+            elif a == 3:
+                button4.invoke()
+            elif a == 4:
+                button5.invoke()
+            elif a == 5:
+                button6.invoke()
+            elif a == 6:
                 button7.invoke()
-            elif playSpace[4] == 2:
+            elif a == 7:
+                button8.invoke()
+            else:
+                button9.invoke()
+        else: # 9
+            if playSpace[5] == 2 and playSpace[2] != 1:
+                button3.invoke()
+            elif playSpace[7] == 2 and playSpace[6] != 1:
+                button7.invoke()
+            elif playSpace[4] == 2 and playSpace[0] != 1:
                 button1.invoke()
             else:
                 if playSpace[0] == 0:
@@ -434,9 +473,9 @@ def ai():
                 elif playSpace[8] == 0:
                     button9.invoke()
     window.after(1000, ai)
-
-
 # -----------------------------        
+
+
 
 # Renders the whole thing
 whosTurn.grid(row=0, column= 2, padx=10, pady= 10)
