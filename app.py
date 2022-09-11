@@ -26,6 +26,8 @@ xSpace = "X"
 xSpaceImg = tk.PhotoImage(file = r"x.png")
 oSpace = "O"
 oSpaceImg = tk.PhotoImage(file = r"o.png")
+withAiImg = tk.PhotoImage(file= r"withAi.png")
+woAiImg = tk.PhotoImage(file= r"woAi.png")
 # -----------------------------
 
 isO = False # Boolean that tells us if it's O's turn
@@ -72,7 +74,7 @@ def changeBtnText(btn):
             pass
 # -----------------------------
 
-# All the buttons
+# All the buttons for game
 button1 = tk.Button(text = emptySpace, image= emptySpaceImg, command= lambda: [changeIndex(button1), changeBtnText(button1),])
 button2 = tk.Button(text = emptySpace, image= emptySpaceImg, command= lambda: [changeIndex(button2), changeBtnText(button2)])
 button3 = tk.Button(text = emptySpace, image= emptySpaceImg, command= lambda: [changeIndex(button3), changeBtnText(button3)])
@@ -84,6 +86,10 @@ button8 = tk.Button(text = emptySpace, image= emptySpaceImg, command= lambda: [c
 button9 = tk.Button(text = emptySpace, image= emptySpaceImg, command= lambda: [changeIndex(button9), changeBtnText(button9)])
 # -----------------------------
 
+# Main menu
+buttonWAi = tk.Button(text = "Play with AI", image = withAiImg, command= lambda: [renderGame(), window.after(1000, ai), buttonWAi.grid_forget(), buttonWOAi.grid_forget()])
+buttonWOAi = tk.Button(text = "Play without AI", image = woAiImg, command= lambda: [renderGame(), buttonWOAi.grid_forget(), buttonWAi.grid_forget()])
+# -----------------------------
 # Change numbers of the assigned index in the array
 def changeIndex(btnn):
     # Declare global variables
@@ -475,22 +481,23 @@ def ai():
     window.after(1000, ai)
 # -----------------------------        
 
+buttonWAi.grid(row=2, column=2, padx=70, pady= 70)
+buttonWOAi.grid(row = 3, column= 2, padx=70, pady= 70)
+def renderGame():
+    # Renders the whole thing
+    whosTurn.grid(row=0, column= 2, padx=10, pady= 10)
+    button1.grid(row=1, column=1, padx=10, pady= 10)
+    button2.grid(row=1, column=2, padx=10, pady= 10)
+    button3.grid(row=1, column=3, padx=10, pady= 10)
+    button4.grid(row=2, column=1, padx=10, pady= 10)
+    button5.grid(row=2, column=2, padx=10, pady= 10)
+    button6.grid(row=2, column=3, padx=10, pady= 10)
+    button7.grid(row=3, column=1, padx=10, pady= 10)
+    button8.grid(row=3, column=2, padx=10, pady= 10)
+    button9.grid(row=3, column=3, padx=10, pady= 10)
+    # -----------------------------
 
-
-# Renders the whole thing
-whosTurn.grid(row=0, column= 2, padx=10, pady= 10)
-button1.grid(row=1, column=1, padx=10, pady= 10)
-button2.grid(row=1, column=2, padx=10, pady= 10)
-button3.grid(row=1, column=3, padx=10, pady= 10)
-button4.grid(row=2, column=1, padx=10, pady= 10)
-button5.grid(row=2, column=2, padx=10, pady= 10)
-button6.grid(row=2, column=3, padx=10, pady= 10)
-button7.grid(row=3, column=1, padx=10, pady= 10)
-button8.grid(row=3, column=2, padx=10, pady= 10)
-button9.grid(row=3, column=3, padx=10, pady= 10)
-# -----------------------------
 
 
 window.after(1000, game)
-window.after(1000, ai)
 window.mainloop()
