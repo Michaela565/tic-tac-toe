@@ -75,7 +75,7 @@ def changeBtnText(btn):
 # -----------------------------
 
 # All the buttons for game
-button1 = tk.Button(text = emptySpace, image= emptySpaceImg, command= lambda: [changeIndex(button1), changeBtnText(button1),])
+button1 = tk.Button(text = emptySpace, image= emptySpaceImg, command= lambda: [changeIndex(button1), changeBtnText(button1)])
 button2 = tk.Button(text = emptySpace, image= emptySpaceImg, command= lambda: [changeIndex(button2), changeBtnText(button2)])
 button3 = tk.Button(text = emptySpace, image= emptySpaceImg, command= lambda: [changeIndex(button3), changeBtnText(button3)])
 button4 = tk.Button(text = emptySpace, image= emptySpaceImg, command= lambda: [changeIndex(button4), changeBtnText(button4)])
@@ -229,7 +229,7 @@ def game():
         whosTurn['fg'] = "#E24599"
     # -----------------------------
 # The AI for X's moves, rlly unoptimized
-# TODO: optimize this fucking thing pls
+# TODO: optimize this thing pls
 def ai():
     if not isO and not gameOver:
         print(lastMove)
